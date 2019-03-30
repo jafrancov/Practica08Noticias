@@ -42,5 +42,22 @@ namespace Practica08Noticias.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public IActionResult Noticia(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var noticia = _context.Noticias
+            .FirstOrDefault(m => m.NoticiaID == id);
+            if (noticia == null)
+            {
+                return NotFound();
+            }
+
+            return View(noticia);
+        }
     }
 }

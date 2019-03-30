@@ -1,28 +1,22 @@
-﻿@model List<Noticias>
+﻿@model IEnumerable<Practica08Noticias.Models.Noticias>
 @{
     ViewData["Title"] = "Home Page";
 }
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
-        <h1 class="display-4">Fluid jumbotron</h1>
-        <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+        <h1 class="display-4">Noticias WEB APP</h1>
+        <p class="lead">Esta página muestra las últimas 10 noticias de la mas reciente a la más antigua.</p>
     </div>
 </div>
-
-<div class="row">
-    <div class="col-sm-4">
-        <div class="card text-center">
-            <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
-            <div class="card-footer text-muted">
-                2 days ago
-            </div>
+@foreach (var noticia in Model)
+{
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">@noticia.Titulo</h4>
+            <p class="card-text">@noticia.Contenido</p>
+            <a href="#" class="card-link">@noticia.Categorias.Nombre</a>
+            <a asp-controller="Home" asp-action="Noticia" asp-route-id="@noticia.NoticiaID" class="card-link">Leer mas..</a> 
         </div>
+        <div class="card-footer">Publicado el @noticia.FechaPublicacion</div>
     </div>
-</div>
-
-@foreach (var n in Model)
-{<li>@n.Titulo</li>}
+}
